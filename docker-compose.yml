@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www
+    ports:
+      - "9070:9070"
+    depends_on:
+      - mariadb
+    restart: always
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: villadb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - "33066:3306"
+    volumes:
+      - villadb:/var/lib/mysql
+    restart: always
+
+volumes:
+  villadb:

@@ -89,7 +89,7 @@
     <main>
         <div id="carousel-home">
             <div class="owl-carousel owl-theme kenburns">
-                <div class="owl-slide background-image cover" data-background="url( {{ asset('landing/img/villa-awal.jpeg') }})">
+                <div class="owl-slide background-image cover" data-background="url( {{ asset('landing/img/depan.jpg') }})">
                     <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                         <div class="container">
                             <div class="row justify-content-center justify-content-md-start">
@@ -98,7 +98,7 @@
                                         <h2 class="owl-slide-animated owl-slide-title-2">
                                             {{ trans('etc.banner') }}
                                         </h2>
-                                        <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="https://drive.google.com/drive/folders/15iq2kO9m_wQMaPaVTuPkb8yoI6kt66rg">Download Brandbook</a></div>
+                                        <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="{{ trans('etc.brandbook') }}">Download Brandbook</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -182,28 +182,24 @@
                     <div class="box_facilities no-border" data-cue="slideInUp">
                         <i class="customicon-private-parking"></i>
                         <h3>Private Parking</h3>
-                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="box_facilities" data-cue="slideInUp">
                         <i class="customicon-wifi"></i>
                         <h3>High Speed Wifi</h3>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="box_facilities" data-cue="slideInUp">
                         <i class="customicon-cocktail"></i>
-                        <h3>Bar & Restaurant</h3>
-                        <p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+                        <h3>Kitchen Sharing</h3>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="box_facilities" data-cue="slideInUp">
-                        <i class="customicon-swimming-pool"></i>
-                        <h3>Swimming Pool</h3>
-                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                        <i class="bi bi-fan"></i>
+                        <h3>Air Conditioner</h3>
                     </div>
                 </div>
             </div>

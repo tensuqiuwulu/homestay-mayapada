@@ -2933,7 +2933,7 @@ a.box_cat_rooms:hover .background-image {
 .box_overlay {
   background-color: #24262d;
   background-color: #24262d;
-  padding: 45px 45px 45px 45px;
+  padding: 45px 45px 45px 225px;
   min-height: 170px;
   color: #fff;
   position: relative;

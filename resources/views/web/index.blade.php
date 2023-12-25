@@ -27,6 +27,38 @@
 
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio (change this if needed) */
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,8 +73,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a href="index.html" class="logo_normal"><img src="{{ asset('landing/img/logo.png') }}" width="135" height="45" alt=""></a>
-                    <a href="index.html" class="logo_sticky"><img src="{{ asset('landing/img/logo_sticky.png') }}" width="135" height="45" alt=""></a>
+                    <a href="index.html" class="logo_normal"><img src="{{ asset('landing/img/logoputih.png') }}" width="135" height="90" alt=""></a>
+                    <a href="index.html" class="logo_sticky"><img src="{{ asset('landing/img/logo.png') }}" width="135" height="90" alt=""></a>
                 </div>
                 <div class="col-6">
                     <nav>
@@ -50,9 +82,18 @@
                             <!-- <a href="{{ route('landing.en') }}">English</a> | <a href="{{ route('landing.id') }}">Bahasa Indonesia</a> -->
                             <li>
                                 <div class="btn_scrollto">
-                                <a href="{{ route('landing.id') }}">Bahasa Indonesia | </a>
-                                <a href="{{ route('landing.en') }}"> English</a>
+                                    <a href="{{ route('landing.id') }}">{!! Request::routeIs(['landing.id']) ? '<b><u>Bahasa Indonesia</u></b>' : 'Bahasa Indonesia' !!} | </a>
+                                    <a href="{{ route('landing.en') }}">{!! Request::routeIs(['landing.en']) ? '<b><u>English</u></b>' : 'English' !!}</a>
+
                                 </div>
+                            </li>
+                            <li>
+                                @if(session('customer'))
+                                <a class="btn_1" data-bs-toggle="modal" data-bs-target="#mybooking">My Booking</a>
+                                @else
+                                <a class="btn_1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book</a>
+                                @endif
+
                             </li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">
@@ -69,7 +110,8 @@
     </header><!-- /Header -->
 
     <div class="nav_panel">
-        <div class="logo_panel"><img src="{{ asset('landing/img/logo_sticky.png') }}" width="135" height="45" alt=""></div>
+        <a href="#" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <div class="logo_panel"><img src="{{ asset('landing/img/logo.png') }}" width="135" height="90" alt=""></div>
         <div class="sidebar-navigation">
             <nav>
                 <ul class="level-1">
@@ -78,6 +120,9 @@
                     <li><a href="#amenities" class="open_close_nav_panel">Local Amenities</a></li>
                     <li><a href="#testimoni" class="open_close_nav_panel">Testimoni</a></li>
                     <li><a href="#contacs" class="open_close_nav_panel">Contact</a></li>
+                    @if(session('customer'))
+                    <li><a href="{{route('customers.auth.logout')}}" class="open_close_nav_panel">Logout</a></li>
+                    @endif
                 </ul>
             </nav>
         </div>
@@ -98,10 +143,11 @@
                                         <h2 class="owl-slide-animated owl-slide-title-2">
                                             {{ trans('etc.banner') }}
                                         </h2>
-                                        <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="{{ trans('etc.brandbook') }}">Download Brandbook</a></div>
+                                        <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="{{ trans('etc.brandbook') }}">{{ trans('etc.download') }} Brandbook</a></div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -120,25 +166,22 @@
             <div class="pattern_2">
                 <div class="container margin_120_95" id="first_section">
                     <div class="row justify-content-between flex-lg-row-reverse align-items-center">
-                        <div class="col-lg-6">
-                            <div class="parallax_wrapper">
-                                <iframe width="600" height="400" src="https://www.youtube.com/embed/BFS9n4B_2xA" frameborder="0" allowfullscreen></iframe>
-                                <!-- <img src="{{ asset('landing/img/home_2.jpg') }}" alt="" class="img-fluid rounded-img">
-                            <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="{{ asset('landing/img/home_1.jpg') }}" alt="" class="rounded-img"></span></div> -->
-                            </div>
-                        </div>
                         <div class="col-lg-5">
                             <div class="intro">
                                 <div class="title">
                                     <small>{{ trans('about.title') }}</small>
-                                    <!-- <h2>Tailored services and the experience of unique holidays</h2> -->
                                 </div>
-                                <!-- <p class="lead">Vivamus volutpat eros pulvinar velit laoreet, sit amet egestas erat dignissim.</p> -->
                                 <p>{{ trans('about.detail') }}</p>
                                 <p><em>{{ trans('about.owner') }}</em></p>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/BFS9n4B_2xA" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
                     </div>
+
                     <!-- /Row -->
                 </div>
                 <!-- /pinned content -->
@@ -174,37 +217,37 @@
                 </div>
 
                 <div class="title text-center mb-5">
-                <small data-cue="slideInUp"></small>
-                <h2 data-cue="slideInUp" data-delay="100">Main Facilities</h2>
+                    <small data-cue="slideInUp"></small>
+                    <h2 data-cue="slideInUp" data-delay="100">Main Facilities</h2>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="box_facilities no-border" data-cue="slideInUp">
+                            <i class="customicon-private-parking"></i>
+                            <h3>Private Parking</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="box_facilities" data-cue="slideInUp">
+                            <i class="customicon-wifi"></i>
+                            <h3>High Speed Wifi</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="box_facilities" data-cue="slideInUp">
+                            <i class="customicon-cocktail"></i>
+                            <h3>Kitchen Sharing</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="box_facilities" data-cue="slideInUp">
+                            <i class="bi bi-fan"></i>
+                            <h3>Air Conditioner</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Row -->
             </div>
-            <div class="row mt-4">
-                <div class="col-xl-3 col-md-6">
-                    <div class="box_facilities no-border" data-cue="slideInUp">
-                        <i class="customicon-private-parking"></i>
-                        <h3>Private Parking</h3>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="box_facilities" data-cue="slideInUp">
-                        <i class="customicon-wifi"></i>
-                        <h3>High Speed Wifi</h3>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="box_facilities" data-cue="slideInUp">
-                        <i class="customicon-cocktail"></i>
-                        <h3>Kitchen Sharing</h3>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="box_facilities" data-cue="slideInUp">
-                        <i class="bi bi-fan"></i>
-                        <h3>Air Conditioner</h3>
-                    </div>
-                </div>
-            </div>
-            <!-- /Row -->
-        </div>
             </div>
             <!-- /container-->
         </section>
@@ -259,41 +302,40 @@
         </section>
         <!-- /bg_white -->
         <section id="testimoni">
-        <div class="parallax_section_1 jarallax" data-jarallax data-speed="0.2">
-            <img class="jarallax-img kenburns-2" src="img/hero_home_1.jpg" alt="">
-            <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="title white">
-                                <small class="mb-1">{{ trans('etc.testimoni') }}</small>
-                                <h2>{{ trans('etc.client') }}</h2>
-                            </div>
-                            <div class="carousel_testimonials owl-carousel owl-theme nav-dots-orizontal">
-                                @foreach($data as $list)
-                                <div>
-                                    <div class="box_overlay">
-
-                                        <h4 style="color: white;">{{ $list['author_name'] }}</h4>
-                                        {{ $list['text'] }}
-
-                                    </div>
-                                    <!-- End box_overlay -->
+            <div class="parallax_section_1 jarallax" data-jarallax data-speed="0.2">
+                <img class="jarallax-img kenburns-2" src="img/hero_home_1.jpg" alt="">
+                <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="title white">
+                                    <small class="mb-1">{{ trans('etc.testimoni') }}</small>
+                                    <h2>{{ trans('etc.client') }}</h2>
                                 </div>
-                                @endforeach
+                                <div class="carousel_testimonials owl-carousel owl-theme nav-dots-orizontal">
+                                    @foreach($data as $list)
+                                    <div>
+                                        <div class="box_overlay">
+
+                                            <h4 style="color: white;">{{ $list['author_name'] }}</h4>
+                                            {{ $list['text'] }}
+
+                                        </div>
+                                        <!-- End box_overlay -->
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <!-- End carousel_testimonials -->
                             </div>
-                            <!-- End carousel_testimonials -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </section>
-        <!-- /parallax_section_1-->
 
     </main>
 
-    
+
     <footer class="revealed">
         <div class="footer_bg">
             <div class="gradient_over"></div>
@@ -302,7 +344,9 @@
         <div class="container">
             <div class="row move_content">
                 <div class="col-lg-9 col-md-12">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2774.3585940363705!2d115.14318996499189!3d-8.639472401746671!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23889f70c0367%3A0x766be1e2f663b367!2sKubu%20Manyar%20Homestay!5e0!3m2!1sid!2sid!4v1701143076097!5m2!1sid!2sid" width="900" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2774.3585940363705!2d115.14318996499189!3d-8.639472401746671!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23889f70c0367%3A0x766be1e2f663b367!2sKubu%20Manyar%20Homestay!5e0!3m2!1sid!2sid!4v1701143076097!5m2!1sid!2sid" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5>{{ trans('etc.contact') }}</h5>
@@ -320,6 +364,7 @@
                     </div>
                 </div>
             </div>
+
             <!--/row-->
         </div>
         <!--/container-->
@@ -329,7 +374,7 @@
             </div>
         </div> -->
     </footer>
- 
+
     <!-- /footer -->
 
     <div class="progress-wrap">
@@ -338,6 +383,167 @@
         </svg>
     </div>
     <!-- /back to top -->
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('customers.auth.login') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <div class="mb-3">
+                            <p class="mb-0">Don't have an account yet? <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdropRegister">Sign up here</a>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdropRegister" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Register</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('customers.auth.register') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Jhon Doe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="+6208776554234">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="mybooking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">My Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addBooking">Add Booking</button>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Booking Date</th>
+                                <th scope="col">Check In</th>
+                                <th scope="col">Check Out</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($bookings as $index => $booking) : ?>
+                                <tr>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $booking->create_at }}</td>
+                                    <td>{{ $booking->check_in }}</td>
+                                    <td>{{ $booking->check_out }}</td>
+                                    <td>{{ $booking->status }}</td>
+                                    <td>
+                                        @if($booking->check_out)
+                                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#review">Review</button>
+                                        @endif
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addBooking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Create New Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="booking_wrapper">
+                        <div class="col-12">
+                            <input type="hidden" id="date_booking" name="date_booking">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="custom_select">
+                                    <select class="wide">
+                                        <option>Select Room</option>
+                                        <option>Double Room</option>
+                                        <option>Deluxe Room</option>
+                                        <option>Superior Room</option>
+                                        <option>Junior Suite</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="qty-buttons mb-3 version_2">
+                                            <input type="button" value="+" class="qtyplus" name="adults_booking">
+                                            <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
+                                            <input type="button" value="-" class="qtyminus" name="adults_booking">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3 qty-buttons mb-3 version_2">
+                                            <input type="button" value="+" class="qtyplus" name="childs_booking">
+                                            <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
+                                            <input type="button" value="-" class="qtyminus" name="childs_booking">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     <!-- COMMON SCRIPTS -->
@@ -348,8 +554,6 @@
 
     <!-- SPECIFIC SCRIPTS -->
     <script src="{{ asset('landing/js/slider.js') }}"></script>
-
-
 
 </body>
 

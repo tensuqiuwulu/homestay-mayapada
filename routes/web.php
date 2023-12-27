@@ -7,6 +7,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ManageBookingController;
 use App\Http\Controllers\Customer\CustomerAuthController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +57,12 @@ Route::middleware(['auth.custom'])->group(function () {
     Route::delete('/admin/room/destroy/{id}', [RoomController::class, 'destroy'])->name('admin.room.destroy');
 
     Route::get('/admin/booking', [ManageBookingController::class, 'index'])->name('admin.booking');
+
+    Route::get('/admin/contact', [ContactController::class, 'index'])->name('admin.contact');
+    Route::get('/admin/contact/create', [ContactController::class, 'create'])->name('admin.contact.create');
+    Route::post('/admin/contact/store', [ContactController::class, 'store'])->name('admin.contact.store');
+    Route::get('/admin/contact/edit/{id}', [ContactController::class, 'edit'])->name('admin.contact.edit');
+    Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->name('admin.contact.update');
+    Route::delete('/admin/contact/destroy/{id}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
+
 });

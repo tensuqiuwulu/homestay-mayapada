@@ -84,7 +84,6 @@
                                 <div class="btn_scrollto">
                                     <a href="{{ route('landing.id') }}">{!! Request::routeIs(['landing.id']) ? '<b><u>Bahasa Indonesia</u></b>' : 'Bahasa Indonesia' !!} | </a>
                                     <a href="{{ route('landing.en') }}">{!! Request::routeIs(['landing.en']) ? '<b><u>English</u></b>' : 'English' !!}</a>
-
                                 </div>
                             </li>
                             <li>
@@ -172,12 +171,13 @@
                                     <small>{{ trans('about.title') }}</small>
                                 </div>
                                 <p>{{ trans('about.detail') }}</p>
+                                <p><small>Wayan Wirta</small></p>
                                 <p><em>{{ trans('about.owner') }}</em></p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/BFS9n4B_2xA" frameborder="0" allowfullscreen></iframe>
+                                <iframe src="https://www.youtube.com/embed/xTIFJC2lP7s" frameborder="0" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -508,30 +508,12 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="custom_select">
-                                    <select class="wide">
-                                        <option>Select Room</option>
-                                        <option>Double Room</option>
-                                        <option>Deluxe Room</option>
-                                        <option>Superior Room</option>
-                                        <option>Junior Suite</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="qty-buttons mb-3 version_2">
                                             <input type="button" value="+" class="qtyplus" name="adults_booking">
                                             <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
                                             <input type="button" value="-" class="qtyminus" name="adults_booking">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3 qty-buttons mb-3 version_2">
-                                            <input type="button" value="+" class="qtyplus" name="childs_booking">
-                                            <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
-                                            <input type="button" value="-" class="qtyminus" name="childs_booking">
                                         </div>
                                     </div>
                                 </div>

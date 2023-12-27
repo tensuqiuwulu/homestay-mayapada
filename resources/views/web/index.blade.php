@@ -202,11 +202,11 @@
                                 <a href="room-details.html" class="box_cat_rooms">
                                     <figure>
                                         <div class="background-image" data-background="url({{ asset($image->file_name)  }})"></div>
-                                        <!-- <div class="info">
-                                        <small>From $150/night</small>
-                                        <h3>Double Room</h3>
-                                        <span>Read more</span>
-                                    </div> -->
+                                        <div class="info">
+                                            <!-- <small>From $150/night</small> -->
+                                            <h3>{{ $image->name }}</h3>
+                                            <!-- <span>Read more</span> -->
+                                        </div> 
                                     </figure>
                                 </a>
                             </div>

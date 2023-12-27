@@ -24,6 +24,7 @@
     <link href="{{ asset('landing/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('landing/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('landing/css/vendors.min.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -58,6 +59,27 @@
             width: 100%;
             height: 100%;
         }
+
+        /* Default styles for larger screens */
+        .btn_scrollto {
+            text-align: right;
+        }
+
+        /* Media query for smaller screens (adjust the max-width as needed) */
+        @media (max-width: 768px) {
+            .btn_scrollto {
+                text-align: center;
+                margin-top: 10px;
+                /* Add some space between the links */
+            }
+
+            .btn_scrollto a {
+                display: block;
+                /* Make the links block-level for stacking vertically */
+                margin-bottom: 5px;
+                /* Add some space between the links */
+            }
+        }
     </style>
 </head>
 
@@ -72,19 +94,17 @@
     <header class="reveal_header">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-6">
-                    <a href="index.html" class="logo_normal"><img src="{{ asset('landing/img/logoputih.png') }}" width="135" height="90" alt=""></a>
-                    <a href="index.html" class="logo_sticky"><img src="{{ asset('landing/img/logo.png') }}" width="135" height="90" alt=""></a>
+
+                <div class="col-6 col-lg-2">
+                    <a href="index.html" class="logo_normal"><img src="{{ asset('landing/img/logoputih.png') }}" width="100" height="90" alt=""></a>
+                    <a href="index.html" class="logo_sticky"><img src="{{ asset('landing/img/logo.png') }}" width="100" height="90" alt=""></a>
                 </div>
-                <div class="col-6">
+                <div class="col-6 col-lg-4">
                     <nav>
                         <ul>
-                            <!-- <a href="{{ route('landing.en') }}">English</a> | <a href="{{ route('landing.id') }}">Bahasa Indonesia</a> -->
                             <li>
-                                <div class="btn_scrollto">
-                                    <a href="{{ route('landing.id') }}">{!! Request::routeIs(['landing.id']) ? '<b><u>Bahasa Indonesia</u></b>' : 'Bahasa Indonesia' !!} | </a>
-                                    <a href="{{ route('landing.en') }}">{!! Request::routeIs(['landing.en']) ? '<b><u>English</u></b>' : 'English' !!}</a>
-                                </div>
+                                <a href="{{ route('landing.id') }}">{!! Request::routeIs(['landing.id']) ? '<b><u>Bahasa Indonesia</u></b>' : 'Bahasa Indonesia' !!} | </a>
+                                <a href="{{ route('landing.en') }}">{!! Request::routeIs(['landing.en']) ? '<b><u>English</u></b>' : 'English' !!}</a>
                             </li>
                             <li>
                                 @if(session('customer'))
@@ -92,7 +112,6 @@
                                 @else
                                 <a class="btn_1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book</a>
                                 @endif
-
                             </li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">
@@ -104,6 +123,8 @@
                         </ul>
                     </nav>
                 </div>
+
+
             </div>
         </div><!-- /container -->
     </header><!-- /Header -->
@@ -206,7 +227,7 @@
                                             <!-- <small>From $150/night</small> -->
                                             <h3>{{ $image->title }}</h3>
                                             <!-- <span>Read more</span> -->
-                                        </div> 
+                                        </div>
                                     </figure>
                                 </a>
                             </div>

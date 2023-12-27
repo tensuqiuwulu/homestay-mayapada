@@ -204,7 +204,7 @@
                                         <div class="background-image" data-background="url({{ asset($image->file_name)  }})"></div>
                                         <div class="info">
                                             <!-- <small>From $150/night</small> -->
-                                            <h3>{{ $image->name }}</h3>
+                                            <h3>{{ $image->title }}</h3>
                                             <!-- <span>Read more</span> -->
                                         </div> 
                                     </figure>

@@ -95,11 +95,11 @@
         <div class="container">
             <div class="row align-items-center">
 
-                <div class="col-6 col-lg-2">
+                <div class="col-6">
                     <a href="index.html" class="logo_normal"><img src="{{ asset('landing/img/logoputih.png') }}" width="100" height="90" alt=""></a>
                     <a href="index.html" class="logo_sticky"><img src="{{ asset('landing/img/logo.png') }}" width="100" height="90" alt=""></a>
                 </div>
-                <div class="col-6 col-lg-4">
+                <div class="col-6">
                     <nav>
                         <ul>
                             <li>
@@ -124,17 +124,19 @@
                     </nav>
                 </div>
 
-
             </div>
         </div><!-- /container -->
     </header><!-- /Header -->
 
     <div class="nav_panel">
         <a href="#" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
-        <div class="logo_panel"><img src="{{ asset('landing/img/logo.png') }}" width="135" height="90" alt=""></div>
+        <div class="logo_panel"><img src="{{ asset('landing/img/logo.png') }}" width="100" height="90" alt=""></div>
         <div class="sidebar-navigation">
             <nav>
                 <ul class="level-1">
+                    <a href="{{ route('landing.id') }}">{!! Request::routeIs(['landing.id']) ? '<b><u>Bahasa Indonesia</u></b>' : 'Bahasa Indonesia' !!} | </a>
+                    <a href="{{ route('landing.en') }}">{!! Request::routeIs(['landing.en']) ? '<b><u>English</u></b>' : 'English' !!}</a>
+                    <hr>
                     <li><a href="#about_us" class="open_close_nav_panel">About</a></li>
                     <li><a href="#rooms" class="open_close_nav_panel">Rooms</a></li>
                     <li><a href="#amenities" class="open_close_nav_panel">Local Amenities</a></li>
@@ -143,9 +145,18 @@
                     @if(session('customer'))
                     <li><a href="{{route('customers.auth.logout')}}" class="open_close_nav_panel">Logout</a></li>
                     @endif
+                    <hr>
+                    <li>
+                        @if(session('customer'))
+                        <a class="btn_1" data-bs-toggle="modal" data-bs-target="#mybooking">My Booking</a>
+                        @else
+                        <a class="btn_1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book</a>
+                        @endif
+                    </li>
                 </ul>
             </nav>
         </div>
+
     </div>
     <!-- /nav_panel -->
 

@@ -2,7 +2,7 @@
 
 return [
     'contact' => "Contacts",
-    'room' => "Rooms",
+    'room' => "Gallery Photo",
     'testimoni' => "Testimonials",
     'client' => "What Visitors Say",
     'amenities' => "Local Amenities",

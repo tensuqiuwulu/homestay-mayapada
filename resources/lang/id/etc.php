@@ -2,7 +2,7 @@
 
 return [
     'contact' => "Kontak",
-    'room' => "Kamar",
+    'room' => "Foto Galeri",
     'testimoni' => "Testimoni",
     'client' => "Apa Kata Pengunjung",
     'amenities' => "Fasilitas Lokal",

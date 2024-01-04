@@ -21,9 +21,6 @@ class LandingController extends Controller
 
         $bookings = [];
 
-        $data = $this->googleService->getReviews();
-        // dd($data);
-
         $images = Images::orderBy('in_order', 'asc')
             ->get();
 
@@ -31,6 +28,6 @@ class LandingController extends Controller
             $bookings = Booking::where('customer_id', session('customer')->id)->get();
         }
 
-        return view('web.index', compact('images', 'data', 'bookings'));
+        return view('web.index', compact('images', 'bookings'));
     }
 }

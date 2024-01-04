@@ -26,51 +26,36 @@
         @endif
 
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Gambar Villa</div>
+            <div class="breadcrumb-title pe-3">Edit Contact</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Gambar Villa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Contact</li>
                     </ol>
                 </nav>
             </div>
         </div>
 
-        <h6 class="mb-0 text-uppercase">Form Gambar Villa</h6>
+        <h6 class="mb-0 text-uppercase">Form Edit Contact</h6>
         <hr />
 
         <div class="card">
             <div class="card-body">
                 <!-- Asumsi $image adalah instance dari model Images yang sedang diedit -->
-                <form action="{{ route('admin.images.update', $image->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.contact.update', $contact->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT') <!-- Method Spoofing untuk mengindikasikan ini adalah request UPDATE -->
 
                     <!-- Judul -->
-                    <input class="form-control mb-3" type="text" name="title" placeholder="Title" aria-label="Title" value="{{ $image->title }}">
+                    <input class="form-control mb-3" type="text" name="title" placeholder="Title" aria-label="Title" value="{{ $contact->type }}" disabled>
 
                     <!-- Order Priority -->
-                    <input class="form-control mb-3" type="number" name="in_order" placeholder="Order Priority" aria-label="Order Priority" value="{{ $image->in_order }}">
+                    <input class="form-control mb-3" type="text" name="contact" placeholder="Contact" aria-label="Order Priority" value="{{ $contact->contact }}">
 
-                    <!-- File Input untuk Gambar (Opsional: Bisa menampilkan gambar saat ini) -->
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Change Image (optional)</label>
-                        <input class="form-control" type="file" id="formFile" name="image">
-                    </div>
-
-                    <!-- Preview Gambar Saat Ini -->
-                    <div>
-                        <label>Current Image:</label>
-
-                    </div>
-
-                    <div>
-                        <img src="{{ asset($image->file_name) }}" alt="{{ $image->title }}" style="max-height: 100px;">
-                    </div>
                     <!-- Submit Button -->
-                    <button class="btn btn-primary mt-2" type="submit">Update</button>
+                    <button class="btn btn-primary mt-2" type="submit">Submit</button>
                 </form>
             </div>
         </div>

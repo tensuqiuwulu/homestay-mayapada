@@ -27,12 +27,6 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="col">
-                    <a href="{{ route('admin.contact.create') }}">
-                        <button type="button" class="btn btn-primary mb-3">Tambah</button>
-                    </a>
-                </div>
-
                 <div class="table-responsive">
                     <table id="images-table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -47,19 +41,10 @@
                             <tr>
                                 <td style="width: 100px;">
                                     <!-- Tombol edit -->
-                                    <a href="{{ route('admin.contact.edit', $image->id) }}" class="btn btn-primary">Edit</a>
-                                    <!-- Tombol hapus -->
-                                    <form action="{{ route('admin.contact.destroy', $image->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                    </form>
+                                    <a href="{{ route('admin.contact.edit', $contact->id) }}" class="btn btn-primary">Edit</a>
                                 </td>
                                 <td>{{ $contact->type }}</td>
                                 <td>{{ $contact->contact }}</td>
-                                <td>
-                                    <img src="{{ asset($image->file_name) }}" alt="{{ $image->title }}" style="max-height: 100px;">
-                                </td>
                                 <!-- Isi data lain sesuai kebutuhan -->
                             </tr>
                             @endforeach

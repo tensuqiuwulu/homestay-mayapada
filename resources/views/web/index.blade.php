@@ -345,17 +345,7 @@
                                     <h2>{{ trans('etc.client') }}</h2>
                                 </div>
                                 <div class="carousel_testimonials owl-carousel owl-theme nav-dots-orizontal">
-                                    @foreach($data as $list)
-                                    <div>
-                                        <div class="box_overlay">
 
-                                            <h4 style="color: white;">{{ $list['author_name'] }}</h4>
-                                            {{ $list['text'] }}
-
-                                        </div>
-                                        <!-- End box_overlay -->
-                                    </div>
-                                    @endforeach
                                 </div>
                                 <!-- End carousel_testimonials -->
                             </div>

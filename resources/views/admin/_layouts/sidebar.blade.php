@@ -6,7 +6,6 @@
     <div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i>
     </div>
   </div>
-  <!--navigation-->
   <ul class="metismenu" id="menu">
     <li class="{{ Request::routeIs(['admin.images']) ? 'mm-active' : '' }}">
       <a href="{{ route('admin.images') }}">
@@ -15,7 +14,7 @@
         <div class="menu-title">Gambar Homestay</div>
       </a>
     </li>
-    <li class="{{ Request::routeIs(['admin.room']) ? 'mm-active' : '' }}">
+    <li class="{{ Request::routeIs('admin.room') ? 'mm-active' : '' }}">
       <a href="{{ route('admin.room') }}">
         <div class="parent-icon"><i class="bx bx-home-smile"></i>
         </div>
@@ -37,5 +36,4 @@
       </a>
     </li>
   </ul>
-  <!--end navigation-->
 </div>

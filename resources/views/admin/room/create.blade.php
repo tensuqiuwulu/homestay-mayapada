@@ -26,32 +26,27 @@
         @endif
 
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Gambar Villa</div>
+            <div class="breadcrumb-title pe-3">Rooms</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Gambar Villa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Rooms</li>
                     </ol>
                 </nav>
             </div>
         </div>
 
-        <h6 class="mb-0 text-uppercase">Form Gambar Villa</h6>
+        <h6 class="mb-0 text-uppercase">Form Create Rooms</h6>
         <hr />
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('admin.images.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.room.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input class="form-control mb-3" type="text" name="title" placeholder="Title" aria-label="Bedroom">
-                    <input class="form-control mb-3" type="number" name="in_order" placeholder="Order Priority" aria-label="1">
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Default file input example</label>
-                        <input class="form-control" type="file" id="formFile" name="image">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Upload</button>
+                    <input class="form-control mb-3" type="text" name="room_number" placeholder="Room Number" aria-label="Room A">
+                    <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
             </div>
         </div>

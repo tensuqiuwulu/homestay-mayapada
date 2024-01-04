@@ -47,9 +47,9 @@
               <tr>
                 <td style="width: 100px;">
                   <!-- Tombol edit -->
-                  <a href="{{ route('admin.images.edit', $image->id) }}" class="btn btn-primary">Edit</a>
+                  <a href="{{ route('admin.room.edit', $room->id) }}" class="btn btn-primary">Edit</a>
                   <!-- Tombol hapus -->
-                  <form action="{{ route('admin.images.destroy', $image->id) }}" method="POST" style="display: inline;">
+                  <form action="{{ route('admin.room.destroy', $room->id) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>

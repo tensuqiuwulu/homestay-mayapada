@@ -44,7 +44,7 @@ class RoomController extends Controller
 
         $room->save();
 
-        return redirect()->route('admin.rooms')->with('success', 'Room successfully created.');
+        return redirect()->route('admin.room')->with('success', 'Room successfully created.');
     }
 
     /**

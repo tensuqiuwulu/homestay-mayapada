@@ -11,4 +11,5 @@ return [
     'amenities_batublong' => "Pantai ini berlokasi di Jalan Pantai Batu Bolong, Canggu, Kuta Utara, Kabupaten Badung, Bali. Lokasi tepatnya terletak di sebelah utara Pantai Kuta dan cukup dekat dengan Kubu Manyar Homestay dengan jarak sekitar 2,7 kilometer. Tempat wisata yang satu ini bisa menjadi salah satu destinasi untuk berlibur atau sekadar bersantai. Pantai ini juga biasanya dijadikan sebagai tempat untuk surfing bagi para peselancar dari mancanegara.",
     'brandbook' => "https://drive.google.com/file/d/1O-78F480vrkG8bvlgGbfuTuUA5qO-ENa/view?usp=sharing",
     'download' => "Unduh",
+    'find_maps' => "Temukan di Peta",
 ];

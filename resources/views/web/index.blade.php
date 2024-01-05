@@ -25,7 +25,9 @@
     <link href="{{ asset('landing/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('landing/css/vendors.min.css') }}" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <style>
@@ -307,6 +309,7 @@
                                 <small>{{ trans('etc.amenities')}}</small>
                                 <h3>Atlas Beach Club</h3>
                                 <p>{{ trans('etc.amenities_atlas')}}</p>
+                                <a href="https://maps.app.goo.gl/kXZhBYdyGzCRW76NA">{{ trans('etc.find_maps') }}</a>
                             </div>
                         </div>
                     </div>
@@ -324,6 +327,7 @@
                                 <small>{{ trans('etc.amenities')}}</small>
                                 <h3>Pantai Batu Bolong</h3>
                                 <p>{{ trans('etc.amenities_batublong')}}</p>
+                                <a href="https://maps.app.goo.gl/VJ22RhhikdWUFJxt7">{{ trans('etc.find_maps') }}</a>
                             </div>
                         </div>
                     </div>
@@ -375,13 +379,13 @@
                     <ul>
                         <li>Jl.Kubu Manyar, Banjar Pipitan, Desa Canggu, Kuta, Badung</li>
                         <li><br></li>
-                        <li><strong><a href="#0">homestaykubumanyar@gmail.com</a></strong></li>
-                        <li><strong><a href="#0">+62-831-1998-9124</a></strong></li>
+                        <li><strong><a href="#0">{{$email->contact}}</a></strong></li>
+                        <li><strong><a href="#0">{{$phone->contact}}</a></strong></li>
                     </ul>
                     <div class="social">
                         <ul>
-                            <li><a href="https://www.instagram.com/kubu_manyar/"><i class="bi bi-instagram"></i></a></li>
-                            <li><a href="https://api.whatsapp.com/send/?phone=%2B6283119989124&text&type=phone_number&app_absent=0"><i class="bi bi-whatsapp"></i></a></li>
+                            <li><a href="{{$instagram->contact}}" target="_blank"><i class="bi bi-instagram"></i></a></li>
+                            <li><a href="{{$whatsapp->contact}}" target="_blank"><i class="bi bi-whatsapp"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -414,15 +418,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('customers.auth.login') }}" method="post" enctype="multipart/form-data">
+                    <form id="login-form">
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                            <input type="email" class="form-control" id="email-login" name="email" placeholder="name@example.com" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password-login" name="password" required>
                         </div>
                         <div class="mb-3">
                             <p class="mb-0">Don't have an account yet? <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdropRegister">Sign up here</a>
@@ -446,7 +450,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('customers.auth.register') }}" method="post" enctype="multipart/form-data">
+                    <form id="register-form">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
@@ -524,24 +528,42 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="booking_wrapper">
-                        <div class="col-12">
-                            <input type="hidden" id="date_booking" name="date_booking">
+                    <form id="booking-form">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Booking Date</label>
+                            <input type="text" class="form-control date-range" placeholder="Booking date" />
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="qty-buttons mb-3 version_2">
-                                            <input type="button" value="+" class="qtyplus" name="adults_booking">
-                                            <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
-                                            <input type="button" value="-" class="qtyminus" name="adults_booking">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Person</label>
+                            <input type="number" class="form-control" placeholder="Input Person" />
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <div id="dayCount"></div>
+                            <div id="price"></div>
+                        </div>
+                        <div class="mb-3">
+                            <h3>Payment Guide to Bank BNI</h3>
+                            <h4>Bank Account Information</h4>
+                            <p>Name: John Doe</p>
+                            <p>Account Number: 1234567890</p>
+
+                            <h4>Important Notes</h4>
+                            <ul>
+                                <li>Make sure to double-check the recipient's name and account number before confirming the payment.</li>
+                                <li>Bank BNI may charge transaction fees; please check with your bank for details.</li>
+                                <li>Payments made during non-business hours may be processed on the next business day.</li>
+                                <li>For any inquiries or assistance, please contact Bank BNI's customer service.</li>
+                            </ul>
+
+                            <p>Thank you for choosing Bank BNI for your payment!</p>
+                            <!-- <img src="{{ asset('assets/images/bni_logo.png') }}" alt="" width="100px"> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Book Now</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -558,6 +580,127 @@
 
     <!-- SPECIFIC SCRIPTS -->
     <script src="{{ asset('landing/js/slider.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        const dateRangeInput = document.querySelector('.date-range');
+        const dayCountDisplay = document.querySelector('#dayCount');
+        const priceDisplay = document.querySelector('#price');
+
+        // Calculate today's date
+        const today = new Date();
+
+        // Initialize Flatpickr with range mode
+        const flatpickrInstance = flatpickr(dateRangeInput, {
+            mode: "range",
+            altInput: true,
+            altFormat: "d F Y",
+            dateFormat: "d-M-Y",
+            minDate: today, // Set the maximum date to today
+            onChange: function(selectedDates, dateStr, instance) {
+                // Calculate the difference in days
+                if (selectedDates.length === 2) {
+                    const startDate = selectedDates[0];
+                    const endDate = selectedDates[1];
+                    const timeDiff = Math.abs(endDate - startDate);
+                    const nightCount = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) - 1;
+                    const price = nightCount * 200000;
+                    const formattedPrice = new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).format(price);
+                    dayCountDisplay.textContent = `Total ${nightCount} night(s)`;
+                    priceDisplay.textContent = `Total ${formattedPrice}`;
+                } else {
+                    dayCountDisplay.textContent = '';
+                    priceDisplay.textContent = '';
+                }
+            }
+        });
+    </script>
+    <script>
+        // login
+        $('#login').on('click', function() {
+            $('#staticBackdrop').modal('show');
+        });
+
+        // login with jQuery
+        $('#login-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('customers.auth.login') }}",
+                method: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log(response);
+                    if (response && response.message && response.message === 'Login berhasil') {
+                        window.location.href = "{{ route('landing.en') }}";
+                    } else {
+                        alert('Login failed. Please try again.'); // Change the message accordingly
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert(xhr.responseText); // Display a generic error message
+                }
+            });
+        });
+
+        // register
+        $('#register').on('click', function() {
+            $('#staticBackdropRegister').modal('show');
+        });
+
+        // register with jQuery
+        $('#register-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('customers.auth.register') }}",
+                method: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log(response);
+                    if (response && response.message && response.message === 'Register berhasil') {
+                        window.location.href = "{{ route('landing.en') }}";
+                    } else {
+                        alert('Register failed. Please try again.'); // Change the message accordingly
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert(xhr.responseText); // Display a generic error message
+                }
+            });
+        });
+
+        // booking
+        $('#booking').on('click', function() {
+            $('#addBooking').modal('show');
+        });
+
+        // booking with jQuery
+        $('#booking-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('customers.booking.store') }}",
+                method: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log(response);
+                    if (response && response.message && response.message === 'Booking berhasil') {
+                        window.location.href = "{{ route('landing.en') }}";
+                    } else {
+                        alert('Booking failed. Please try again.'); // Change the message accordingly
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert(xhr.responseText); // Display a generic error message
+                }
+            });
+        });
+    </script>
 
 </body>
 

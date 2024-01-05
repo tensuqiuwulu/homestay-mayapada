@@ -8,21 +8,25 @@ use App\Models\Customer;
 
 class CustomerAuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request): object
     {
         $customer = Customer::where('email', $request->email)->first();
 
         if ($customer) {
             if (password_verify($request->password, $customer->password)) {
                 session(['customer' => $customer]);
-                return redirect()->route('landing.en');
+                return response()->json([
+                    'message' => 'Login berhasil'
+                ], 200);
             }
         }
 
-        return redirect()->route('landing.en')->with('error', 'Email atau password salah');
+        return response()->json([
+            'Email atau password salah'
+        ], 422);
     }
 
-    public function register(Request $request)
+    public function register(Request $request): object
     {
 
         // $request->validate([
@@ -41,7 +45,9 @@ class CustomerAuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('landing.en');
+        return response()->json([
+            'message' => 'Register berhasil'
+        ], 200);
     }
 
     public function logout()

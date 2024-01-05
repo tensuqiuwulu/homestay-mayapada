@@ -11,4 +11,5 @@ return [
     'amenities_batublong' => "Batu Bolong Beach is located on Jalan Pantai Batu Bolong, Canggu, North Kuta, Badung Regency, Bali. The exact location is north of Kuta Beach and quite close to Kubu Manyar Homestay with a distance of around 2.7 kilometers. This tourist spot can be a destination for a holiday or just relaxing. This beach is also usually used as a surfing place for surfers from abroad.",
     'brandbook' => "https://drive.google.com/file/d/1JQ6u6j0Vm0y9PaIsRrbV8BiKQDxPkcV_/view?usp=sharing",
     'download' => "Download",
+    'find_maps' => "Find on Maps",
 ];

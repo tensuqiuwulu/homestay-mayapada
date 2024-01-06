@@ -7,7 +7,12 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ManageBookingController;
 use App\Http\Controllers\Customer\CustomerAuthController;
+use App\Http\Controllers\Customer\BookingController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Customer\ReviewController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +41,24 @@ Route::post('/customers/auth/register', [CustomerAuthController::class, 'registe
 Route::post('/customers/auth/login', [CustomerAuthController::class, 'login'])->name('customers.auth.login');
 Route::get('/customers/auth/logout', [CustomerAuthController::class, 'logout'])->name('customers.auth.logout');
 
+Route::post('/customers/booking/store', [BookingController::class, 'storeBooking'])->name('customers.booking.store');
+
+Route::post('/customers/review/store', [ReviewController::class, 'store'])->name('customers.review.store');
+
+Route::get('/customers/invoice/{id}', [InvoiceController::class, 'downloadInvoice'])->name('customers.invoice');
+
+
+
 
 Route::middleware(['auth.custom'])->group(function () {
     Route::get('/admin', function () {
         return redirect()->route('admin.images');
     });
+
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/admin/customer', [CustomerController::class, 'index'])->name('admin.customer');
+
 
     Route::get('/admin/images', [ImagesController::class, 'index'])->name('admin.images');
     Route::get('/admin/images/create', [ImagesController::class, 'create'])->name('admin.images.create');
@@ -57,6 +75,9 @@ Route::middleware(['auth.custom'])->group(function () {
     Route::delete('/admin/room/destroy/{id}', [RoomController::class, 'destroy'])->name('admin.room.destroy');
 
     Route::get('/admin/booking', [ManageBookingController::class, 'index'])->name('admin.booking');
+    Route::get('/admin/booking/detail/{id}', [ManageBookingController::class, 'show'])->name('admin.booking.detail');
+    Route::put('/admin/booking/update-status/{id}', [ManageBookingController::class, 'updateStatus'])->name('admin.booking.update-status');
+    Route::put('/admin/booking/update-paid-status/{id}', [ManageBookingController::class, 'updatePaidStatus'])->name('admin.booking.update-paid-status');
 
     Route::get('/admin/contact', [ContactController::class, 'index'])->name('admin.contact');
     Route::get('/admin/contact/create', [ContactController::class, 'create'])->name('admin.contact.create');

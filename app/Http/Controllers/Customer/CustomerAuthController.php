@@ -21,9 +21,10 @@ class CustomerAuthController extends Controller
             }
         }
 
-        return response()->json([
-            'Email atau password salah'
-        ], 422);
+        return response()->json(
+            'Email atau password salah',
+            422
+        );
     }
 
     public function register(Request $request): object

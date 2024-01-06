@@ -17,10 +17,14 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->integer("customer_id");
             $table->integer("room_id");
-            $table->date("check_in");
-            $table->date("check_out");
+            $table->date("check_in")->nullable();
+            $table->date("check_out")->nullable();
+            $table->date("start_date");
+            $table->date("end_date");
+            $table->integer("total_night");
             $table->float("total_price");
             $table->integer("total_person");
+            $table->integer("paid_status");
             $table->integer("status");
             $table->timestamps();
         });

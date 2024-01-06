@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Images;
 use App\Models\Booking;
 use App\Models\Contact;
+use App\Models\Review;
 
 class LandingController extends Controller
 {
@@ -18,6 +19,7 @@ class LandingController extends Controller
         $whatsapp = Contact::where('type', 'whatsapp')->first();
         $email = Contact::where('type', 'email')->first();
         $phone = Contact::where('type', 'phone')->first();
+        $reviews = Review::all();
 
         $bookings = [];
 
@@ -36,6 +38,7 @@ class LandingController extends Controller
             'whatsapp' => $whatsapp,
             'email' => $email,
             'phone' => $phone,
+            'reviews' => $reviews
         ]);
     }
 }

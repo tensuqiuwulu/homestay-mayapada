@@ -27,42 +27,56 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="col">
-                    <a href="{{ route('admin.images.create') }}">
-                        <button type="button" class="btn btn-primary mb-3">Tambah</button>
-                    </a>
-                </div>
-
                 <div class="table-responsive">
                     <table id="images-table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Aksi</th>
-                                <th>Judul</th>
-                                <th>In Order</th>
-                                <th>Path Gambar</th>
+                                <th>No Booking</th>
+                                <th>Customer</th>
+                                <th>Book Start</th>
+                                <th>Book End</th>
+                                <th>Status Booking</th>
+                                <th>Status Paid</th>
+                                <th>Price</th>
                                 <!-- Tambahkan atau sesuaikan kolom lain jika diperlukan -->
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($images as $image)
+                            @foreach ($bookings as $booking)
                             <tr>
-                                <td style="width: 100px;">
-                                    <!-- Tombol edit -->
-                                    <a href="{{ route('admin.images.edit', $image->id) }}" class="btn btn-primary">Edit</a>
-                                    <!-- Tombol hapus -->
-                                    <form action="{{ route('admin.images.destroy', $image->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                    </form>
-                                </td>
-                                <td>{{ $image->title }}</td>
-                                <td>{{ $image->in_order }}</td>
                                 <td>
-                                    <img src="{{ asset($image->file_name) }}" alt="{{ $image->title }}" style="max-height: 100px;">
+                                    <a href="{{ route('admin.booking.detail', $booking->id) }}">
+                                        <button type="button" class="btn btn-primary btn-sm">Detail</button>
+                                    </a>
                                 </td>
-                                <!-- Isi data lain sesuai kebutuhan -->
+                                <td>{{ $booking->no_booking }}</td>
+                                <td>{{ $booking->customer->name }}</td>
+                                <td>{{ $booking->start_date }}</td>
+                                <td>{{ $booking->end_date }}</td>
+                                <td>
+                                    @if ($booking->status == 0)
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    @elseif ($booking->status == 1)
+                                    <span class="badge bg-primary">Check In</span>
+                                    @elseif ($booking->status == 2)
+                                    <span class="badge bg-success">Check Out</span>
+                                    @elseif ($booking->status == 3)
+                                    <span class="badge bg-danger">Cancel</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($booking->paid_status == 0)
+                                    <span class="badge bg-warning text-dark">Unpaid</span>
+                                    @elseif ($booking->paid_status == 1)
+                                    <span class="badge bg-success">Paid</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <!-- price indo format -->
+                                    Rp. {{ number_format($booking->total_price, 0, ',', '.') }}
+                                </td>
+                                <!-- Tambahkan atau sesuaikan kolom lain jika diperlukan -->
                             </tr>
                             @endforeach
                         </tbody>

@@ -349,14 +349,19 @@
                                     <h2>{{ trans('etc.client') }}</h2>
                                 </div>
                                 <div class="carousel_testimonials owl-carousel owl-theme nav-dots-orizontal">
+                                    @foreach($reviews as $review)
+                                    <div class="box_overlay">
 
+                                        <h4 style="text-align: center;">{{$review->customer->name}}</h4>
+                                        {{$review->review}}
+                                    </div>
+                                    @endforeach
+                                    <!-- End carousel_testimonials -->
                                 </div>
-                                <!-- End carousel_testimonials -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
     </main>
@@ -488,33 +493,74 @@
                 </div>
                 <div class="modal-body">
                     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addBooking">Add Booking</button>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Booking Date</th>
-                                <th scope="col">Check In</th>
-                                <th scope="col">Check Out</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($bookings as $index => $booking) : ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ $booking->create_at }}</td>
-                                    <td>{{ $booking->check_in }}</td>
-                                    <td>{{ $booking->check_out }}</td>
-                                    <td>{{ $booking->status }}</td>
-                                    <td>
-                                        @if($booking->check_out)
-                                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#review">Review</button>
-                                        @endif
-                                    </td>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">#No Booking</th>
+                                    <th scope="col">Booking Date</th>
+                                    <th scope="col">Check In</th>
+                                    <th scope="col">Check Out</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Status Booking</th>
+                                    <th scope="col">Status Paid</th>
                                 </tr>
-                            <?php endforeach ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($bookings as $index => $booking) : ?>
+                                    <tr>
+                                        <td>
+                                            <!-- add detail button -->
+                                            @if($booking->check_out != null && $booking->is_review == 0)
+                                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addReview" onclick="setBookingId({{$booking->id}})">Review</button>
+
+                                            @else
+                                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" disabled>Review</button>
+                                            @endif
+                                            <a href="{{ route('customers.invoice', ['id' => $booking->id]) }}">
+                                                <button type="button" class="btn btn-primary mb-3" onclick="setBookingId({{$booking->id}})">Invoice</button>
+                                            </a>
+                                        </td>
+                                        <th scope="row">{{ $booking->no_booking }}</th>
+                                        <td>
+                                            <?php
+                                            $date = date_create($booking->created_at);
+                                            echo date_format($date, "d F Y");
+                                            ?>
+                                        </td>
+                                        <td>
+                                            {{ $booking->check_in }}
+                                        </td>
+                                        <td>
+                                            {{ $booking->check_out }}
+                                        </td>
+                                        <td>
+                                            Rp. {{ number_format($booking->total_price, 0, ',', '.') }}
+                                        </td>
+                                        <td>
+                                            @if($booking->status == 0)
+                                            Pending
+                                            @elseif($booking->status == 1)
+                                            Check In
+                                            @elseif($booking->status == 2)
+                                            Check Out
+                                            @elseif($booking->status == 3)
+                                            Cancel
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($booking->paid_status == 0)
+                                            Unpaid
+                                            @elseif($booking->paid_status == 1)
+                                            Paid
+                                            @endif
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -532,11 +578,11 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Booking Date</label>
-                            <input type="text" class="form-control date-range" placeholder="Booking date" />
+                            <input type="text" class="form-control date-range" name="book_range" placeholder="Booking date" />
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Person</label>
-                            <input type="number" class="form-control" placeholder="Input Person" />
+                            <input type="number" class="form-control" name="total_person" placeholder="Input Person" />
                         </div>
                         <div class="mb-3">
                             <div id="dayCount"></div>
@@ -569,6 +615,31 @@
         </div>
     </div>
 
+    <div class="modal fade" id="addReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Create New Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="review-form">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Review</label>
+                            <textarea class="form-control" name="review" id="review" cols="30" rows="10"></textarea>
+                            <input type="hidden" name="booking_id">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -583,10 +654,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!--sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.1/feather.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         const dateRangeInput = document.querySelector('.date-range');
         const dayCountDisplay = document.querySelector('#dayCount');
         const priceDisplay = document.querySelector('#price');
+
+        console.log(dateRangeInput);
 
         // Calculate today's date
         const today = new Date();
@@ -604,7 +682,7 @@
                     const startDate = selectedDates[0];
                     const endDate = selectedDates[1];
                     const timeDiff = Math.abs(endDate - startDate);
-                    const nightCount = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) - 1;
+                    const nightCount = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
                     const price = nightCount * 200000;
                     const formattedPrice = new Intl.NumberFormat('id-ID', {
                         style: 'currency',
@@ -618,6 +696,14 @@
                 }
             }
         });
+    </script>
+    <script>
+        var bookingId;
+
+        // Function to set the booking_id when the button is clicked
+        function setBookingId(id) {
+            bookingId = id;
+        }
     </script>
     <script>
         // login
@@ -635,6 +721,14 @@
                 success: function(response) {
                     console.log(response);
                     if (response && response.message && response.message === 'Login berhasil') {
+                        // set sweet alert success login
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Login Success',
+                            text: 'Redirecting...',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        })
                         window.location.href = "{{ route('landing.en') }}";
                     } else {
                         alert('Login failed. Please try again.'); // Change the message accordingly
@@ -642,7 +736,12 @@
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert(xhr.responseText); // Display a generic error message
+                    // swet alert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: xhr.responseText,
+                    })
                 }
             });
         });
@@ -662,14 +761,28 @@
                 success: function(response) {
                     console.log(response);
                     if (response && response.message && response.message === 'Register berhasil') {
-                        window.location.href = "{{ route('landing.en') }}";
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Register Success',
+                            text: 'Please Login',
+                            showConfirmButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('#staticBackdropRegister').modal('hide');
+                                $('#staticBackdrop').modal('show');
+                            }
+                        })
                     } else {
                         alert('Register failed. Please try again.'); // Change the message accordingly
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert(xhr.responseText); // Display a generic error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: xhr.responseText,
+                    })
                 }
             });
         });
@@ -689,6 +802,12 @@
                 success: function(response) {
                     console.log(response);
                     if (response && response.message && response.message === 'Booking berhasil') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Booking Success',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        })
                         window.location.href = "{{ route('landing.en') }}";
                     } else {
                         alert('Booking failed. Please try again.'); // Change the message accordingly
@@ -696,7 +815,52 @@
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert(xhr.responseText); // Display a generic error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: xhr.responseText,
+                    })
+                }
+            });
+        });
+
+        // review
+        // $(document).ready(function() {
+        $('#addReview').on('shown.bs.modal', function() {
+
+            // Mengisi nilai booking_id ke input hidden
+            $('input[name="booking_id"]').val(bookingId);
+        });
+        // });
+
+        // review with jQuery
+        $('#review-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('customers.review.store') }}",
+                method: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log(response);
+                    if (response && response.message && response.message === 'Review success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Review Success',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        })
+                        window.location.href = "{{ route('landing.en') }}";
+                    } else {
+                        alert('Review failed. Please try again.'); // Change the message accordingly
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: xhr.responseText,
+                    })
                 }
             });
         });

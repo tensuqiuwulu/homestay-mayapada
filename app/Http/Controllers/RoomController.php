@@ -87,9 +87,9 @@ class RoomController extends Controller
         $room = Room::findOrFail($id);
 
         // Perbarui judul dan in_order
-        $image->room_number = $request->room_number;
+        $room->room_number = $request->room_number;
         // Simpan perubahan ke database
-        $image->save();
+        $room->save();
 
         // Redirect kembali dengan pesan sukses
         return redirect()->route('admin.room')->with('success', 'Image successfully updated.');

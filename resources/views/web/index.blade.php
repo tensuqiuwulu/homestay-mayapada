@@ -250,6 +250,7 @@
                     <!-- /carousel-->
                 </div>
 
+                <br><br>
                 <div class="title text-center mb-5">
                     <small data-cue="slideInUp"></small>
                     <h2 data-cue="slideInUp" data-delay="100">Main Facilities</h2>

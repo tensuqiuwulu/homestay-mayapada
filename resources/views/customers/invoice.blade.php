@@ -24,10 +24,10 @@
 </head>
 
 <body>
-    <h6 class="mb-0 text-uppercase">Detail Booking #</h6>
-    <img src="{{ asset('landing/img/logoputih.png') }}" width="100" height="90" alt="">
+    <img src="{{ asset('landing/img/logo.png') }}" width="100" height="90" alt="">
     <h3>Kubu Manyar Homestay</h3>
     <hr />
+    <h6 class="mb-0 text-uppercase">Detail Booking #</h6>
     <table>
         <tr>
             <td>No Booking</td>

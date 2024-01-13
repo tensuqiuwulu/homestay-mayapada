@@ -47,6 +47,12 @@ Route::post('/customers/review/store', [ReviewController::class, 'store'])->name
 
 Route::get('/customers/invoice/{id}', [InvoiceController::class, 'downloadInvoice'])->name('customers.invoice');
 
+Route::post('/customers/bukti/store', [BookingController::class, 'uploadBuktiBayar'])->name('customers.bukti.store');
+
+// getr bukti bayar
+Route::get('/customers/bukti/{id}', [BookingController::class, 'getBuktiBayarByBookingId'])->name('customers.bukti.get');
+
+
 
 
 

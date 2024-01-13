@@ -32,7 +32,8 @@ class Booking extends Model
         'paid_status',
         'status',
         'no_booking',
-        'is_review'
+        'is_review',
+        'bukti_upload',
     ];
 
     public function customer()

@@ -72,6 +72,71 @@ class BookingController extends Controller
         ], 200);
     }
 
+    public function uploadBuktiBayar(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'booking_id' => 'required|exists:bookings,id', // Make sure 'id' exists in the 'bookings' table
+            'bukti_bayar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Find the booking by its ID
+        $booking = Booking::find($request->booking_id);
+
+        if (!$booking) {
+            return response()->json([
+                'message' => 'Booking not found'
+            ], 404);
+        }
+
+        // Handle the file upload
+        if ($request->hasFile('bukti_bayar')) {
+            $file = $request->file('bukti_bayar');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            // Store the uploaded file in the 'public/bukti_bayar' directory
+            $file->storeAs('public/bukti_bayar', $fileName);
+
+            // Update the 'bukti_upload' field in the booking
+            $booking->bukti_upload = $fileName;
+            $booking->save();
+
+            return response()->json([
+                'message' => 'Success'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'No file uploaded'
+            ], 400);
+        }
+    }
+
+    public function getBuktiBayarByBookingId($id)
+    {
+        $booking = Booking::find($id);
+
+        if (!$booking) {
+            return response()->json([
+                'message' => 'Booking not found'
+            ], 404);
+        }
+
+        if ($booking->bukti_upload == null) {
+            return response()->json([
+                'message' => 'Bukti bayar not found'
+            ], 404);
+        }
+
+        $filePath = 'storage/bukti_bayar/' . $booking->bukti_upload;
+
+        // Return JSON response with success message and file path
+        return response()->json([
+            'message' => 'Success',
+            'path' => asset($filePath) // Use asset() to generate the correct URL
+        ], 200);
+    }
+    
+
     public function show()
     {
     }

@@ -95,6 +95,20 @@
                         <td>:</td>
                         <td> Rp. {{ number_format($booking->total_price, 0, ',', '.') }}</td>
                     </tr>
+                    <!-- bukti bayar -->
+                    @if ($booking->bukti_upload != null)
+                    <tr>
+                        <td>Bukti Bayar</td>
+                        <td>:</td>
+                        <td>
+                            <a href="{{ asset('storage/bukti_bayar/' . $booking->bukti_upload) }}" target="_blank">
+                                <img src="{{ asset('storage/bukti_bayar/' . $booking->bukti_upload) }}" alt="Bukti Bayar" style="width: 200px;">
+                            </a>
+                        </td>
+                    </tr>
+
+                    @endif
+                    <!-- end bukti bayar -->
                 </table>
 
                 <hr />

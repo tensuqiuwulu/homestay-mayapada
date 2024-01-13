@@ -516,12 +516,11 @@
                                             @if($booking->check_out != null && $booking->is_review == 0)
                                             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addReview" onclick="setBookingId({{$booking->id}})">Review</button>
 
-                                            @else
-                                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" disabled>Review</button>
                                             @endif
                                             <a href="{{ route('customers.invoice', ['id' => $booking->id]) }}">
                                                 <button type="button" class="btn btn-primary mb-3" onclick="setBookingId({{$booking->id}})">Invoice</button>
                                             </a>
+                                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addBuktiBayar" onclick="setBookingId({{$booking->id}})">Payment</button>
                                         </td>
                                         <th scope="row">{{ $booking->no_booking }}</th>
                                         <td>
@@ -594,17 +593,6 @@
                             <h4>Bank Account Information</h4>
                             <p>Name: John Doe</p>
                             <p>Account Number: 1234567890</p>
-
-                            <h4>Important Notes</h4>
-                            <ul>
-                                <li>Make sure to double-check the recipient's name and account number before confirming the payment.</li>
-                                <li>Bank BNI may charge transaction fees; please check with your bank for details.</li>
-                                <li>Payments made during non-business hours may be processed on the next business day.</li>
-                                <li>For any inquiries or assistance, please contact Bank BNI's customer service.</li>
-                            </ul>
-
-                            <p>Thank you for choosing Bank BNI for your payment!</p>
-                            <!-- <img src="{{ asset('assets/images/bni_logo.png') }}" alt="" width="100px"> -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -641,7 +629,42 @@
         </div>
     </div>
 
+    <div class="modal fade" id="addBuktiBayar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Upload Proof of Payment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bukti-upload-form">
+                        @csrf
+                        <div class="mb-3">
+                            <h3>Payment Guide to Bank BCA</h3>
+                            <h4>Bank Account Information</h4>
+                            <p>Name: I GEDE BAGAS PUTRAWAN</p>
+                            <p>Account Number: 7703051466</p>
+                        </div>
 
+                        <!-- get bukti bayar file -->
+                        <div id="gambar-container">
+                            <!-- Ini adalah tempat di mana gambar akan ditampilkan -->
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Upload Proof of Payment</label>
+                            <input type="file" class="form-control" name="bukti_bayar" id="bukti_bayar" />
+                            <input type="hidden" name="booking_id">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- COMMON SCRIPTS -->
@@ -865,6 +888,70 @@
                 }
             });
         });
+
+        // bukti bayar
+
+        $('#addBuktiBayar').on('shown.bs.modal', function() {
+
+            // Mengisi nilai booking_id ke input hidden
+            $('input[name="booking_id"]').val(bookingId);
+            var id = $('input[name="booking_id"]').val();
+
+            $.ajax({
+                url: '/customers/bukti/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.message === 'Success') {
+                        var imageUrl = response.path;
+                        var imageElement = '<img src="' + imageUrl + '" alt="Gambar Bukti Bayar" style="width: 160px; cursor: pointer;" onclick="openImageInNewTab(\'' + imageUrl + '\');">';
+                        $('#gambar-container').html(imageElement);
+                    } else {
+                        $('#gambar-container').html();
+                    }
+                },
+            });
+        });
+
+        // bukti bayar with jQuery
+        $('#bukti-upload-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('customers.bukti.store') }}",
+                method: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    if (response && response.message && response.message === 'Success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Bukti Bayar Success',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        })
+                        window.location.href = "{{ route('landing.en') }}";
+                    } else {
+                        alert('Bukti bayar failed. Please try again.'); // Change the message accordingly
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: xhr.responseText,
+                    })
+                }
+            });
+
+
+        });
+
+        function openImageInNewTab(imageUrl) {
+            window.open(imageUrl, '_blank');
+        }
     </script>
 
 </body>

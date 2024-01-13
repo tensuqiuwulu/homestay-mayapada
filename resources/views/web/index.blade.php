@@ -352,7 +352,7 @@
                                     @foreach($reviews as $review)
                                     <div class="box_overlay">
 
-                                        <h4 style="text-align: center;">{{$review->customer->name}}</h4>
+                                        <h4>{{$review->customer->name}}</h4>
                                         {{$review->review}}
                                     </div>
                                     @endforeach

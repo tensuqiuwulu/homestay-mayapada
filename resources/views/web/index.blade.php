@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>Villa</title>
+    <title>Kubu Manyar Homestay</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -181,7 +181,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -250,8 +249,7 @@
                     <!-- /carousel-->
                 </div>
 
-                <br><br>
-                <div class="title text-center mb-5">
+                <div class="title text-center mb-5" style="margin-top: 20px;">
                     <small data-cue="slideInUp"></small>
                     <h2 data-cue="slideInUp" data-delay="100">Main Facilities</h2>
                 </div>

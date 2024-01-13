@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--favicon-->
-  <link rel="icon" href="{{ asset('assets/images/favicon-32x32.png') }}" type="image/png" />
+  <!-- <link rel="icon" href="{{ asset('assets/images/favicon-32x32.png') }}" type="image/png" /> -->
   <!--plugins-->
   <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
   <!-- loader-->
@@ -20,7 +20,7 @@
   <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
 
   @stack('css')
-  <title>Siwalatri</title>
+  <title>Kubu Manyar Homestay</title>
 </head>
 
 <body>

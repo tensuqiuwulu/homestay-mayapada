@@ -206,8 +206,7 @@
                                     <small>{{ trans('about.title') }}</small>
                                 </div>
                                 <p>{{ trans('about.detail') }}</p>
-                                <p><small>Wayan Wirta</small></p>
-                                <p><em>{{ trans('about.owner') }}</em></p>
+                                <p><em>Wayan Wirta {{ trans('about.owner') }}</em></p>
                             </div>
                         </div>
                         <div class="col-lg-6">

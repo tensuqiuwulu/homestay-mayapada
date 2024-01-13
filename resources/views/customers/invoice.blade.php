@@ -25,6 +25,9 @@
 
 <body>
     <h6 class="mb-0 text-uppercase">Detail Booking #</h6>
+    <img src="{{ asset('landing/img/logoputih.png') }}" width="100" height="90" alt="">
+    <h3>Kubu Manyar Homestay</h3>
+    <hr />
     <table>
         <tr>
             <td>No Booking</td>

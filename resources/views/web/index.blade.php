@@ -31,6 +31,14 @@
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <style>
+        @media (max-width: 767px) {
+            .btn_1.d-lg-block {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <style>
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -110,10 +118,14 @@
                             </li>
                             <li>
                                 @if(session('customer'))
-                                <a class="btn_1" data-bs-toggle="modal" data-bs-target="#mybooking">My Booking</a>
+                                <!-- Tombol My Booking akan muncul ketika layar memiliki lebar lebih dari 768px -->
+                                <a class="btn_1 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#mybooking">My Booking</a>
                                 @else
-                                <a class="btn_1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Booking</a>
+                                <!-- Tombol Booking akan muncul pada layar dengan lebar kurang dari atau sama dengan 768px -->
+                                <a class="btn_1 d-lg-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Booking</a>
                                 @endif
+
+
                             </li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">

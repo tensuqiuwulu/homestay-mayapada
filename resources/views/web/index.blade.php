@@ -122,10 +122,8 @@
                                 <a class="btn_1 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#mybooking">My Booking</a>
                                 @else
                                 <!-- Tombol Booking akan muncul pada layar dengan lebar kurang dari atau sama dengan 768px -->
-                                <a class="btn_1 d-lg-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Booking</a>
+                                <a class="btn_1 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Booking</a>
                                 @endif
-
-
                             </li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">

@@ -508,8 +508,8 @@
                                 <tr>
                                     <th scope="col">Action</th>
                                     <th scope="col">#No Booking</th>
-                                    <th scope="col">Booking Date</th>
                                     <th scope="col">Room</th>
+                                    <th scope="col">Booking Date</th>
                                     <th scope="col">Check In</th>
                                     <th scope="col">Check Out</th>
                                     <th scope="col">Price</th>

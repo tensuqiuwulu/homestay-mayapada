@@ -34,6 +34,7 @@
                                 <th>Aksi</th>
                                 <th>No Booking</th>
                                 <th>Customer</th>
+                                <th>Room</th>
                                 <th>Book Start</th>
                                 <th>Book End</th>
                                 <th>Status Booking</th>
@@ -52,6 +53,7 @@
                                 </td>
                                 <td>{{ $booking->no_booking }}</td>
                                 <td>{{ $booking->customer->name }}</td>
+                                <td>{{ $booking->rooms->room_number }}</td>
                                 <td>{{ $booking->start_date }}</td>
                                 <td>{{ $booking->end_date }}</td>
                                 <td>

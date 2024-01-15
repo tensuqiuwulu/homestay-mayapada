@@ -509,6 +509,7 @@
                                     <th scope="col">Action</th>
                                     <th scope="col">#No Booking</th>
                                     <th scope="col">Booking Date</th>
+                                    <th scope="col">Room</th>
                                     <th scope="col">Check In</th>
                                     <th scope="col">Check Out</th>
                                     <th scope="col">Price</th>
@@ -531,6 +532,7 @@
                                             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addBuktiBayar" onclick="setBookingId({{$booking->id}})">Payment</button>
                                         </td>
                                         <th scope="row">{{ $booking->no_booking }}</th>
+                                        <th scope="row">{{ $booking->rooms->room_number }}</th>
                                         <td>
                                             <?php
                                             $date = date_create($booking->created_at);
@@ -650,8 +652,8 @@
                         <div class="mb-3">
                             <h3>Payment Guide to Bank BCA</h3>
                             <h4>Bank Account Information</h4>
-                            <p>Name: I GEDE BAGAS PUTRAWAN</p>
-                            <p>Account Number: 7703051466</p>
+                            <p>Name: John Doe</p>
+                            <p>Account Number: 1234567890</p>
                         </div>
 
                         <!-- get bukti bayar file -->

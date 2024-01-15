@@ -55,6 +55,11 @@
                         <td>{{ $booking->customer->name }}</td>
                     </tr>
                     <tr>
+                        <td>Room</td>
+                        <td>:</td>
+                        <td>{{ $booking->rooms->room_number }}</td>
+                    </tr>
+                    <tr>
                         <td>Book Start</td>
                         <td>:</td>
                         <td>{{ $booking->start_date }}</td>

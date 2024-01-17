@@ -60,10 +60,7 @@ class ContactController extends Controller
         // Validasi request
 
         $contact = Contact::findOrFail($id);
-
-        // Perbarui judul dan in_order
-        $contact->room_number = $request->contact;
-        // Simpan perubahan ke database
+        $contact->contact = $request->contact;
         $contact->save();
 
         // Redirect kembali dengan pesan sukses

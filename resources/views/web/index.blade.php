@@ -161,7 +161,7 @@
                     <li><a href="#rooms" class="open_close_nav_panel">Rooms</a></li>
                     <li><a href="#amenities" class="open_close_nav_panel">Local Amenities</a></li>
                     <li><a href="#testimoni" class="open_close_nav_panel">Testimoni</a></li>
-                    <li><a href="#contacs" class="open_close_nav_panel">Contact</a></li>
+                    <li><a href="#contact" class="open_close_nav_panel">Contact</a></li>
                     @if(session('customer'))
                     <li><a href="{{route('customers.auth.logout')}}" class="open_close_nav_panel">Logout</a></li>
                     @endif
@@ -377,12 +377,12 @@
 
 
 
-    <footer class="revealed">
+    <footer>
         <div class="footer_bg">
             <div class="gradient_over"></div>
             <div class="background-image" data-background="url(img/rooms/3.jpg)"></div>
         </div>
-        <section id="contacs">
+        <section id="contact">
             <div class="container">
                 <div class="row move_content">
                     <div class="col-lg-9 col-md-12">
@@ -406,17 +406,10 @@
                         </div>
                     </div>
                 </div>
-
-                <!--/row-->
             </div>
         </section>
-        <!--/container-->
-        <!-- <div class="copy">
-            <div class="container">
-                © Paradise - by <a href="#">Ansonika</a>
-            </div>
-        </div> -->
     </footer>
+
 
 
     <!-- /footer -->
@@ -514,6 +507,8 @@
                                     <th scope="col">#No Booking</th>
                                     <th scope="col">Room</th>
                                     <th scope="col">Booking Date</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
                                     <th scope="col">Check In</th>
                                     <th scope="col">Check Out</th>
                                     <th scope="col">Price</th>
@@ -540,6 +535,18 @@
                                         <td>
                                             <?php
                                             $date = date_create($booking->created_at);
+                                            echo date_format($date, "d F Y");
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $date = date_create($booking->start_date);
+                                            echo date_format($date, "d F Y");
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $date = date_create($booking->end_date);
                                             echo date_format($date, "d F Y");
                                             ?>
                                         </td>

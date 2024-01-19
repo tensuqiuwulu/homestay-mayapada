@@ -376,37 +376,40 @@
     </main>
 
 
+
     <footer class="revealed">
         <div class="footer_bg">
             <div class="gradient_over"></div>
             <div class="background-image" data-background="url(img/rooms/3.jpg)"></div>
         </div>
-        <div class="container">
-            <div class="row move_content">
-                <div class="col-lg-9 col-md-12">
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2774.3585940363705!2d115.14318996499189!3d-8.639472401746671!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23889f70c0367%3A0x766be1e2f663b367!2sKubu%20Manyar%20Homestay!5e0!3m2!1sid!2sid!4v1701143076097!5m2!1sid!2sid" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <section id="contacs">
+            <div class="container">
+                <div class="row move_content">
+                    <div class="col-lg-9 col-md-12">
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2774.3585940363705!2d115.14318996499189!3d-8.639472401746671!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23889f70c0367%3A0x766be1e2f663b367!2sKubu%20Manyar%20Homestay!5e0!3m2!1sid!2sid!4v1701143076097!5m2!1sid!2sid" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5>{{ trans('etc.contact') }}</h5>
-                    <ul>
-                        <li>Jl.Kubu Manyar, Banjar Pipitan, Desa Canggu, Kuta, Badung</li>
-                        <li><br></li>
-                        <li><strong><a href="#0">{{$email->contact}}</a></strong></li>
-                        <li><strong><a href="#0">{{$phone->contact}}</a></strong></li>
-                    </ul>
-                    <div class="social">
+                    <div class="col-lg-3 col-md-6">
+                        <h5>{{ trans('etc.contact') }}</h5>
                         <ul>
-                            <li><a href="{{$instagram->contact}}" target="_blank"><i class="bi bi-instagram"></i></a></li>
-                            <li><a href="{{$whatsapp->contact}}" target="_blank"><i class="bi bi-whatsapp"></i></a></li>
+                            <li>Jl.Kubu Manyar, Banjar Pipitan, Desa Canggu, Kuta, Badung</li>
+                            <li><br></li>
+                            <li><strong><a href="#0">{{$email->contact}}</a></strong></li>
+                            <li><strong><a href="#0">{{$phone->contact}}</a></strong></li>
                         </ul>
+                        <div class="social">
+                            <ul>
+                                <li><a href="{{$instagram->contact}}" target="_blank"><i class="bi bi-instagram"></i></a></li>
+                                <li><a href="{{$whatsapp->contact}}" target="_blank"><i class="bi bi-whatsapp"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--/row-->
-        </div>
+                <!--/row-->
+            </div>
+        </section>
         <!--/container-->
         <!-- <div class="copy">
             <div class="container">
@@ -414,6 +417,7 @@
             </div>
         </div> -->
     </footer>
+
 
     <!-- /footer -->
 

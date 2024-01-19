@@ -50,6 +50,11 @@
                         <td>{{ $booking->no_booking }}</td>
                     </tr>
                     <tr>
+                        <td>Booking Date</td>
+                        <td>:</td>
+                        <td>{{ $booking->created_at }}</td>
+                    </tr>
+                    <tr>
                         <td>Customer</td>
                         <td>:</td>
                         <td>{{ $booking->customer->name }}</td>

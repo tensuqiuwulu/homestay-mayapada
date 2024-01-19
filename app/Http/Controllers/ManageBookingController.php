@@ -46,11 +46,16 @@ class ManageBookingController extends Controller
 
     public function updatePaidStatus(Request $request, $id)
     {
+        
         $booking = Booking::findOrFail($id);
 
-        $booking->paid_status = $request->paid_status;
-        $booking->save();
-
+        if ($request->status == 3) {
+            $booking->status = $request->status;
+            $booking->save();
+        } else {
+            $booking->paid_status = $request->paid_status;
+            $booking->save();
+        }
         return redirect()->route('admin.booking.detail', $id)->with('success', 'Booking successfully updated.');
     }
 }

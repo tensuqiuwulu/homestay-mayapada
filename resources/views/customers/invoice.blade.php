@@ -35,6 +35,21 @@
             <td>{{ $booking->no_booking }}</td>
         </tr>
         <tr>
+            <td>Booking Date</td>
+            <td>:</td>
+            <td>
+                <?php
+                $date = date_create($booking->created_at);
+                echo date_format($date, "d F Y");
+                ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Room</td>
+            <td>:</td>
+            <td>{{ $booking->rooms->room_number }}</td>
+        </tr>
+        <tr>
             <td>Customer</td>
             <td>:</td>
             <td>{{ $booking->customer->name }}</td>
@@ -42,22 +57,34 @@
         <tr>
             <td>Book Start</td>
             <td>:</td>
-            <td>{{ $booking->start_date }}</td>
+            <td> <?php
+                    $date = date_create($booking->start_date);
+                    echo date_format($date, "d F Y");
+                    ?></td>
         </tr>
         <tr>
             <td>Book End</td>
             <td>:</td>
-            <td>{{ $booking->end_date }}</td>
+            <td> <?php
+                    $date = date_create($booking->end_date);
+                    echo date_format($date, "d F Y");
+                    ?></td>
         </tr>
         <tr>
             <td>Check In</td>
             <td>:</td>
-            <td>{{ $booking->check_in }}</td>
+            <td> <?php
+                    $date = date_create($booking->check_in);
+                    echo date_format($date, "d F Y");
+                    ?></td>
         </tr>
         <tr>
             <td>Check Out</td>
             <td>:</td>
-            <td>{{ $booking->check_in }}</td>
+            <td> <?php
+                    $date = date_create($booking->check_out);
+                    echo date_format($date, "d F Y");
+                    ?></td>
         </tr>
 
         <tr>

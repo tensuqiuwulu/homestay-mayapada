@@ -162,6 +162,7 @@
                     <li><a href="#amenities" class="open_close_nav_panel">Local Amenities</a></li>
                     <li><a href="#testimoni" class="open_close_nav_panel">Testimoni</a></li>
                     <li><a href="#contact" class="open_close_nav_panel">Contact</a></li>
+                    <li><a href="#contact" class="open_close_nav_panel">{{ trans('etc.panduan') }}</a></li>
                     @if(session('customer'))
                     <li><a href="{{route('customers.auth.logout')}}" class="open_close_nav_panel">Logout</a></li>
                     @endif
@@ -242,7 +243,7 @@
                     <div class="owl-carousel owl-theme carousel_item_centered_rooms rounded-img">
                         <?php foreach ($images as $index => $image) : ?>
                             <div class="item">
-                                <a href="room-details.html" class="box_cat_rooms">
+                                <a href="#" class="box_cat_rooms">
                                     <figure>
                                         <div class="background-image" data-background="url({{ asset($image->file_name)  }})"></div>
                                         <div class="info">
@@ -476,9 +477,10 @@
                             <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
+    <label for="password" class="form-label">New Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+    <input type="checkbox" id="showPassword"> Show Password
+</div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Register</button>
@@ -609,12 +611,6 @@
                             <div id="dayCount"></div>
                             <div id="price"></div>
                         </div>
-                        <div class="mb-3">
-                            <h3>Payment Guide to Bank BNI</h3>
-                            <h4>Bank Account Information</h4>
-                            <p>Name: John Doe</p>
-                            <p>Account Number: 1234567890</p>
-                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Book Now</button>
@@ -703,6 +699,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.1/feather.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    document.getElementById('showPassword').addEventListener('change', function() {
+        var passwordField = document.getElementById('password');
+        if (this.checked) {
+            passwordField.type = 'text';
+        } else {
+            passwordField.type = 'password';
+        }
+    });
+</script>
 
     <script>
         const dateRangeInput = document.querySelector('.date-range');

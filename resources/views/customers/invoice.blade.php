@@ -58,32 +58,28 @@
             <td>Book Start</td>
             <td>:</td>
             <td> <?php
-                    $date = date_create($booking->start_date);
-                    echo date_format($date, "d F Y");
+                    echo $booking->start_date;
                     ?></td>
         </tr>
         <tr>
             <td>Book End</td>
             <td>:</td>
             <td> <?php
-                    $date = date_create($booking->end_date);
-                    echo date_format($date, "d F Y");
+                    echo $booking->end_date;
                     ?></td>
         </tr>
         <tr>
             <td>Check In</td>
             <td>:</td>
             <td> <?php
-                    $date = date_create($booking->check_in);
-                    echo date_format($date, "d F Y");
+                    echo $booking->check_in;
                     ?></td>
         </tr>
         <tr>
             <td>Check Out</td>
             <td>:</td>
             <td> <?php
-                    $date = date_create($booking->check_out);
-                    echo date_format($date, "d F Y");
+                    echo $booking->check_out;
                     ?></td>
         </tr>
 

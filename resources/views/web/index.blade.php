@@ -243,7 +243,7 @@
                     <div class="owl-carousel owl-theme carousel_item_centered_rooms rounded-img">
                         <?php foreach ($images as $index => $image) : ?>
                             <div class="item">
-                                <a href="#" class="box_cat_rooms">
+                                <a class="box_cat_rooms">
                                     <figure>
                                         <div class="background-image" data-background="url({{ asset($image->file_name)  }})"></div>
                                         <div class="info">
@@ -477,10 +477,10 @@
                             <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
                         </div>
                         <div class="mb-3">
-    <label for="password" class="form-label">New Password</label>
-    <input type="password" class="form-control" id="password" name="password">
-    <input type="checkbox" id="showPassword"> Show Password
-</div>
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="checkbox" id="showPassword"> Show Password
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Register</button>
@@ -701,15 +701,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-    document.getElementById('showPassword').addEventListener('change', function() {
-        var passwordField = document.getElementById('password');
-        if (this.checked) {
-            passwordField.type = 'text';
-        } else {
-            passwordField.type = 'password';
-        }
-    });
-</script>
+        document.getElementById('showPassword').addEventListener('change', function() {
+            var passwordField = document.getElementById('password');
+            if (this.checked) {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        });
+    </script>
 
     <script>
         const dateRangeInput = document.querySelector('.date-range');

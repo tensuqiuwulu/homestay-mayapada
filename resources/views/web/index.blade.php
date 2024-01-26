@@ -659,8 +659,8 @@
                         <div class="mb-3">
                             <h3>Payment Guide to Bank BCA</h3>
                             <h4>Bank Account Information</h4>
-                            <p>Name: John Doe</p>
-                            <p>Account Number: 1234567890</p>
+                            <p>Name: I GEDE BAGAS PUTRAWAN</p>
+                            <p>Account Number: 7703051466</p>
                         </div>
 
                         <!-- get bukti bayar file -->

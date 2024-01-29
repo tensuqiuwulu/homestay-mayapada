@@ -157,11 +157,11 @@
                         @endif
                     </li>
                     <hr>
-                    <li><a href="#about_us" class="open_close_nav_panel">{{ trans('about') }}</a></li>
-                    <li><a href="#rooms" class="open_close_nav_panel">{{ trans('rooms') }}</a></li>
-                    <li><a href="#amenities" class="open_close_nav_panel">{{ trans('local_amenities') }}</a></li>
-                    <li><a href="#testimoni" class="open_close_nav_panel">{{ trans('testimonials') }}</a></li>
-                    <li><a href="#contact" class="open_close_nav_panel">{{ trans('contact') }}</a></li>
+                    <li><a href="#about_us" class="open_close_nav_panel">{{ trans('etc.about') }}</a></li>
+                    <li><a href="#rooms" class="open_close_nav_panel">{{ trans('etc.rooms') }}</a></li>
+                    <li><a href="#amenities" class="open_close_nav_panel">{{ trans('etc.local_amenities') }}</a></li>
+                    <li><a href="#testimoni" class="open_close_nav_panel">{{ trans('etc.testimonials') }}</a></li>
+                    <li><a href="#contact" class="open_close_nav_panel">{{ trans('etc.contact') }}</a></li>
                     <!-- <li><a href="https://drive.google.com/drive/folders/1aXnFnZL4Vpt4uL2MtqWOQB5zcUdGUJ4G?usp=sharing" class="open_close_nav_panel">{{ trans('etc.panduan') }}</a></li> -->
                     @if(session('customer'))
                     <li><a href="{{route('customers.auth.logout')}}" class="open_close_nav_panel">Logout</a></li>

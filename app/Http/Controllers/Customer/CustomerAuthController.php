@@ -30,12 +30,9 @@ class CustomerAuthController extends Controller
     public function register(Request $request): object
     {
 
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'phone_number' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:customers',
-        //     'password' => 'required|string|min:8',
-        // ]);
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:customers',
+        ]);
 
 
         $customer = Customer::create([

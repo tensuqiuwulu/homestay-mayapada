@@ -162,7 +162,7 @@
                     <li><a href="#amenities" class="open_close_nav_panel">Local Amenities</a></li>
                     <li><a href="#testimoni" class="open_close_nav_panel">Testimoni</a></li>
                     <li><a href="#contact" class="open_close_nav_panel">Contact</a></li>
-                    <li><a href="https://drive.google.com/drive/folders/1aXnFnZL4Vpt4uL2MtqWOQB5zcUdGUJ4G?usp=sharing" class="open_close_nav_panel">{{ trans('etc.panduan') }}</a></li>
+                    <!-- <li><a href="https://drive.google.com/drive/folders/1aXnFnZL4Vpt4uL2MtqWOQB5zcUdGUJ4G?usp=sharing" class="open_close_nav_panel">{{ trans('etc.panduan') }}</a></li> -->
                     @if(session('customer'))
                     <li><a href="{{route('customers.auth.logout')}}" class="open_close_nav_panel">Logout</a></li>
                     @endif

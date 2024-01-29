@@ -13,4 +13,9 @@ return [
     'download' => "Unduh",
     'find_maps' => "Temukan di Peta",
     'panduan' => "Panduan Website",
+    'about' => "Tentang",
+    'rooms' => "Kamar",
+    'local_amenities' => "Fasilitas Lokal",
+    'testimonials' => "Testimoni",
+    'contact' => "Kontak",
 ];

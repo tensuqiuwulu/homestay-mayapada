@@ -13,4 +13,9 @@ return [
     'download' => "Download",
     'find_maps' => "Find on Maps",
     'panduan' => "Website Guide",
+    'about' => "About",
+    'rooms' => "Rooms",
+    'local_amenities' => "Local Amenities",
+    'testimonials' => "Testimonials",
+    'contact' => "Contact",
 ];

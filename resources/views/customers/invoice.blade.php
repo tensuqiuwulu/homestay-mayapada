@@ -55,6 +55,11 @@
             <td>{{ $booking->customer->name }}</td>
         </tr>
         <tr>
+            <td>Additional Customer Name</td>
+            <td>:</td>
+            <td>{{ $booking->additional_person_name }}</td>
+        </tr>
+        <tr>
             <td>Book Start</td>
             <td>:</td>
             <td> <?php

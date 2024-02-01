@@ -13,7 +13,7 @@ class BookingController extends Controller
     {
         $request->validate([
             'book_range' => 'required',
-            'total_person' => 'required',
+            'total_person' => 'required|numeric|max:2',
         ]);
 
         $dateParts = explode(" to ", $request->book_range);
@@ -65,6 +65,7 @@ class BookingController extends Controller
         $booking->paid_status = Booking::PAID_STATUS_UNPAID;
         $booking->total_night = $numNights;
         $booking->no_booking = rand(100000, 999999);
+        $booking->additional_person_name = $request->additional_person_name;
         $booking->save();
 
         return response()->json([

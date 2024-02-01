@@ -34,6 +34,7 @@ class Booking extends Model
         'no_booking',
         'is_review',
         'bukti_upload',
+        'additional_person_name',
     ];
 
     public function customer()

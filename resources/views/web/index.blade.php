@@ -188,7 +188,13 @@
                                         <h2 class="owl-slide-animated owl-slide-title-2">
                                             {{ trans('etc.banner') }}
                                         </h2>
-                                        <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="{{ trans('etc.brandbook') }}">{{ trans('etc.download') }} Brandbook</a></div>
+                                        <!-- <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="{{ trans('etc.brandbook') }}">{{ trans('etc.download') }} Brandbook</a></div> -->
+                                        <!-- check lang -->
+                                        @if(app()->getLocale() == 'id')
+                                        <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="{{ $brandbookIndonesia['link'] }}">{{ trans('etc.download') }} Brandbook</a></div>
+                                        @else
+                                        <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="{{ $brandbookEnglish['link'] }}">{{ trans('etc.download') }} Brandbook</a></div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -605,7 +611,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Person</label>
-                            <input type="number" class="form-control" name="total_person" placeholder="Input Person" />
+                            <input type="number" class="form-control" name="total_person" placeholder="Input Person" max="2"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Additional Person Name</label>
+                            <input type="text" class="form-control" name="additional_person_name" placeholder="Input Additional Person Name" />
                         </div>
                         <div class="mb-3">
                             <div id="dayCount"></div>

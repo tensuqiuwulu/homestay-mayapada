@@ -42,6 +42,13 @@
         <div class="menu-title">Manage Contact</div>
       </a>
     </li>
+    <li class="{{ Request::routeIs(['admin.brandbook']) ? 'mm-active' : '' }}">
+      <a href="{{ route('admin.brandbook') }}">
+        <div class="parent-icon"><i class="bx bx-book"></i>
+        </div>
+        <div class="menu-title">Manage Brandbook</div>
+      </a>
+    </li>
     <li class="{{ Request::routeIs(['admin.customer']) ? 'mm-active' : '' }}">
       <a href="{{ route('admin.customer') }}">
         <div class="parent-icon"><i class="bx bx-user"></i>

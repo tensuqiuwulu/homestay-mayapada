@@ -7,6 +7,7 @@ use App\Models\Images;
 use App\Models\Booking;
 use App\Models\Contact;
 use App\Models\Review;
+use App\Models\Brandbook;
 
 class LandingController extends Controller
 {
@@ -19,6 +20,10 @@ class LandingController extends Controller
         $whatsapp = Contact::where('type', 'whatsapp')->first();
         $email = Contact::where('type', 'email')->first();
         $phone = Contact::where('type', 'phone')->first();
+
+        $brandbookEnglish = Brandbook::where('lang', 'English')->first();
+        $brandbookIndonesia = Brandbook::where('lang', 'Indonesia')->first();
+
         $reviews = Review::all();
 
         $bookings = [];
@@ -38,7 +43,9 @@ class LandingController extends Controller
             'whatsapp' => $whatsapp,
             'email' => $email,
             'phone' => $phone,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'brandbookEnglish' => $brandbookEnglish,
+            'brandbookIndonesia' => $brandbookIndonesia,
         ]);
     }
 }

@@ -13,6 +13,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Customer\ReviewController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\BrandbookController;
+use App\Models\Brandbook;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,5 +93,12 @@ Route::middleware(['auth.custom'])->group(function () {
     Route::get('/admin/contact/edit/{id}', [ContactController::class, 'edit'])->name('admin.contact.edit');
     Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->name('admin.contact.update');
     Route::delete('/admin/contact/destroy/{id}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
+
+    Route::get('/admin/brandbook', [BrandbookController::class, 'index'])->name('admin.brandbook');
+    Route::get('/admin/brandbook/create', [BrandbookController::class, 'create'])->name('admin.brandbook.create');
+    Route::post('/admin/brandbook/store', [BrandbookController::class, 'store'])->name('admin.brandbook.store');
+    Route::get('/admin/brandbook/edit/{id}', [BrandbookController::class, 'edit'])->name('admin.brandbook.edit');
+    Route::put('/admin/brandbook/update/{id}', [BrandbookController::class, 'update'])->name('admin.brandbook.update');
+    Route::delete('/admin/brandbook/destroy/{id}', [BrandbookController::class, 'destroy'])->name('admin.brandbook.destroy');
 
 });

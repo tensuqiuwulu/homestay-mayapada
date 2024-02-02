@@ -316,16 +316,16 @@
                         <div class="col-lg-6">
                             <div class="pinned-image rounded_container pinned-image--small mb-4">
                                 <div class="pinned-image__container">
-                                    <img src="{{ asset('assets/images/altas.jpeg') }}" alt="">
+                                    <img src="{{ asset('assets/images/jfc.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5">
                             <div class="title">
                                 <small>{{ trans('etc.amenities')}}</small>
-                                <h3>Atlas Beach Club</h3>
+                                <h3>Jaya Fried Chicken</h3>
                                 <p>{{ trans('etc.amenities_atlas')}}</p>
-                                <a href="https://maps.app.goo.gl/kXZhBYdyGzCRW76NA">{{ trans('etc.find_maps') }}</a>
+                                <a href="https://maps.app.goo.gl/sbv2uNZxuJFxtJzU6">{{ trans('etc.find_maps') }}</a>
                             </div>
                         </div>
                     </div>

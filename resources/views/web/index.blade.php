@@ -710,6 +710,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.1/feather.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_882f06f40dced10b1cd613c2b6f4274c9'
+        });
+    </script>
+
     <script>
         document.getElementById('showPassword').addEventListener('change', function() {
             var passwordField = document.getElementById('password');
